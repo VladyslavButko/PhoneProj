@@ -30,7 +30,7 @@ namespace PhoneMysql.Data.DB
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Ошибка при инициализации подключения: " + ex.Message);
+                Console.WriteLine("ERROR initializing connection: " + ex.Message);
             }
         }
 
@@ -43,7 +43,7 @@ namespace PhoneMysql.Data.DB
             }
             catch (MySqlException ex)
             {
-                Console.WriteLine("Ошибка при открытии подключения: " + ex.Message);
+                Console.WriteLine("ERROR when try to open connection: " + ex.Message);
                 return false;
             }
         }
@@ -57,7 +57,7 @@ namespace PhoneMysql.Data.DB
             }
             catch (MySqlException ex)
             {
-                Console.WriteLine("Ошибка при закрытии подключения: " + ex.Message);
+                Console.WriteLine("ERROR when try to close connection: " + ex.Message);
                 return false;
             }
         }

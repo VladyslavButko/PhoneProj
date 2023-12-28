@@ -2,7 +2,6 @@
 using PhoneMysql.Data.DAO.Interface;
 using PhoneMysql.Data.Entities;
 using PhoneMysql.Data.DB;
-using System;
 
 namespace PhoneMysql.Data.DAO.MySQLImplementation
 {

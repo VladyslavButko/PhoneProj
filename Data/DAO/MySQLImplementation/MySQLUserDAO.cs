@@ -2,16 +2,30 @@
 using PhoneMysql.Data.DAO.Interface;
 using PhoneMysql.Data.DB;
 using PhoneMysql.Data.Entities;
+using PhoneMysql.Data.Observer;
 
 namespace PhoneMysql.Data.DAO.MySQLImplementation
 {
     public class MySQLUserDAO : UserDAO
     {
         private readonly DBConnection dbConnection;
-
+        private readonly List<UserObserver> usersAddedObservers = new List<UserObserver>();
         public MySQLUserDAO(DBConnection connection)
         {
             dbConnection = connection;
+        }
+
+        public void userAddedObserver(UserObserver listener)
+        {
+            usersAddedObservers.Add(listener);
+        }
+
+        private void NotifyUserAdded(User user)
+        {
+            foreach (var listener in usersAddedObservers)
+            {
+                listener.userAdded(user);
+            }
         }
 
         public int add(User user)
@@ -31,6 +45,8 @@ namespace PhoneMysql.Data.DAO.MySQLImplementation
                     cmd.Parameters.AddWithValue("@role_fk", user.RoleId);
 
                     rowsAffected = cmd.ExecuteNonQuery();
+
+                    NotifyUserAdded(user);
                 }
             }
             catch (Exception ex)

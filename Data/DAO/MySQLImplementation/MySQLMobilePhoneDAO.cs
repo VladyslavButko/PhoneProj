@@ -2,14 +2,13 @@
 using PhoneMysql.Data.DAO.Interface;
 using PhoneMysql.Data.Entities;
 using PhoneMysql.Data.DB;
-using System;
 
 namespace PhoneMysql.Data.DAO.MySQLImplementation
 {
     public class MySQLMobilePhoneDAO : MobilePhoneDAO
     {
         private readonly DBConnection dbConnection;
-
+        
         public MySQLMobilePhoneDAO(DBConnection connection)
         {
             dbConnection = connection;
@@ -35,6 +34,8 @@ namespace PhoneMysql.Data.DAO.MySQLImplementation
                     cmd.Parameters.AddWithValue("@Price", mobilePhone.price);
 
                     rowsAffected = cmd.ExecuteNonQuery();
+
+                    
                 }
             }
             catch (Exception ex)
